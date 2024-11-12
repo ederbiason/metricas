@@ -91,7 +91,7 @@ ax1.set_title('Percentual de Serviços Urgentes Pendentes')
 ax1.set_ylim(0, 100)
 st.pyplot(fig1)
 
-data_urgente_pendentes = data[(data['Urgência'] == 'Urgente') & (~data['Status'].isin(['Fechado', 'Em Progresso']))]
+data_urgente_pendentes = data[(data['Urgência'] == 'Urgente') & (~data['Status'].isin(['Fechado']))]
 data_urgente_fechados = data[(data['Urgência'] == 'Urgente') & (data['Status'] == 'Fechado')]
 percent_urgente_pendentes = len(data_urgente_pendentes)
 percent_urgente_fechados = len(data_urgente_fechados)
