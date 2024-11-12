@@ -82,14 +82,14 @@ ax1.set_title("Distribuição de Solicitações por Definição de Analista")
 st.pyplot(fig1)
 
 # Isso pode indicar um problema de atraso na resolução ou priorização incorreta
-data_urgente_pendentes = data[(data['Urgência'] == 'Urgente') & (~data['Status'].isin(['Fechado', 'Em Progresso']))]
-percent_urgente_pendentes = (len(data_urgente_pendentes) / len(data[data['Urgência'] == 'Urgente'])) * 100
-fig1, ax1 = plt.subplots()
-ax1.bar(['Urgentes em Aberto ou\n em Progresso'], [percent_urgente_pendentes], color='orange')
-ax1.set_ylabel('Percentual (%)')
-ax1.set_title('Percentual de Serviços Urgentes Pendentes')
-ax1.set_ylim(0, 100)
-st.pyplot(fig1)
+#data_urgente_pendentes = data[(data['Urgência'] == 'Urgente') & (~data['Status'].isin(['Fechado', 'Em Progresso']))]
+#percent_urgente_pendentes = (len(data_urgente_pendentes) / len(data[data['Urgência'] == 'Urgente'])) * 100
+#fig1, ax1 = plt.subplots()
+#ax1.bar(['Urgentes em Aberto ou\n em Progresso'], [percent_urgente_pendentes], color='orange')
+#ax1.set_ylabel('Percentual (%)')
+#ax1.set_title('Percentual de Serviços Urgentes Pendentes')
+#ax1.set_ylim(0, 100)
+#st.pyplot(fig1)
 
 data_urgente_pendentes = data[(data['Urgência'] == 'Urgente') & (~data['Status'].isin(['Fechado', 'Em Progresso']))]
 data_urgente_fechados = data[(data['Urgência'] == 'Urgente') & (data['Status'] == 'Fechado')]
@@ -105,7 +105,7 @@ sizes = [
     (percent_urgente_fechados / total_urgente) * 100
 ]
 
-labels = ['Urgentes em Aberto ou Não em Progresso', 'Urgentes Fechados']
+labels = ['Urgentes Pendentes', 'Urgentes Fechados']
 colors = ['orange', 'lightgreen']
 explode = (0.1, 0)  # Destacar a primeira fatia (pendentes)
 
