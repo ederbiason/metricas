@@ -90,3 +90,21 @@ ax1.set_ylabel('Percentual (%)')
 ax1.set_title('Percentual de Serviços Urgentes Pendentes')
 ax1.set_ylim(0, 100)
 st.pyplot(fig1)
+
+data_urgente_pendentes = data[(data['Urgência'] == 'Urgente') & (~data['Status'].isin(['Fechado', 'Em Progresso']))]
+data_urgente_fechados = data[(data['Urgência'] == 'Urgente') & (data['Status'] == 'Fechado')]
+percent_urgente_pendentes = len(data_urgente_pendentes)
+percent_urgente_fechados = len(data_urgente_fechados)
+total_urgente = percent_urgente_pendentes + percent_urgente_fechados
+
+sizes = [
+    (percent_urgente_pendentes / total_urgente) * 100,
+    (percent_urgente_fechados / total_urgente) * 100
+]
+labels = ['Urgentes em Aberto ou Não em Progresso', 'Urgentes Fechados']
+colors = ['orange', 'green']
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
+ax1.set_title('Distribuição de Serviços Urgentes Pendentes vs Fechados')
+ax1.axis('equal') 
+st.pyplot(fig1)
