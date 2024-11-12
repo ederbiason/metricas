@@ -91,20 +91,32 @@ ax1.set_title('Percentual de Serviços Urgentes Pendentes')
 ax1.set_ylim(0, 100)
 st.pyplot(fig1)
 
-data_urgente_pendentes = data[(data['Urgência'] == 'Urgente') & (~data['Status'].isin(['Fechado']))]
+data_urgente_pendentes = data[(data['Urgência'] == 'Urgente') & (~data['Status'].isin(['Fechado', 'Em Progresso']))]
 data_urgente_fechados = data[(data['Urgência'] == 'Urgente') & (data['Status'] == 'Fechado')]
+
+# Percentuais de cada categoria
 percent_urgente_pendentes = len(data_urgente_pendentes)
 percent_urgente_fechados = len(data_urgente_fechados)
 total_urgente = percent_urgente_pendentes + percent_urgente_fechados
 
+# Calcular os percentuais relativos
 sizes = [
     (percent_urgente_pendentes / total_urgente) * 100,
     (percent_urgente_fechados / total_urgente) * 100
 ]
+
 labels = ['Urgentes em Aberto ou Não em Progresso', 'Urgentes Fechados']
-colors = ['orange', 'green']
+colors = ['orange', 'lightgreen']
+explode = (0.1, 0)  # Destacar a primeira fatia (pendentes)
+
+# Criar gráfico de pizza
 fig1, ax1 = plt.subplots()
-ax1.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
+ax1.pie(
+    sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90,
+    explode=explode, shadow=True, wedgeprops={'edgecolor': 'black'}
+)
 ax1.set_title('Distribuição de Serviços Urgentes Pendentes vs Fechados')
-ax1.axis('equal') 
+ax1.axis('equal')  # Assegurar que o gráfico seja um círculo
+
+# Mostrar o gráfico no Streamlit
 st.pyplot(fig1)
